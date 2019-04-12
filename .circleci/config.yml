@@ -8,7 +8,7 @@ jobs:
     docker:    
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-#    working_directory: ~/circleci-demo-java-spring
+    working_directory: ~/repo 
     branches:
       only:
         - demo6
@@ -26,6 +26,7 @@ jobs:
       - checkout
 
       # Download and cache dependencies    
+      
       - restore_cache:
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }} 
             # - v1-dependencies-{{ checksum "pom.xml" }}
@@ -40,4 +41,5 @@ jobs:
          # key: v1-dependencies-{{ checksum "pom.xml" }}
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       # run tests!
+      - run: cd api && mvn test
       - run: mvn integration-test
