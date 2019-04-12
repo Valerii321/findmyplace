@@ -7,7 +7,10 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/maven:3.3-jdk-8
+    branches:
+      only:
+        - demo6
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -24,18 +27,19 @@ jobs:
       - checkout
 
       # Download and cache dependencies
+      
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
+          key: circleci/openjdk:8-jdk-{{ checksum "pom.xml" }} 
+            # - v1-dependencies-{{ checksum "pom.xml" }}
+            # # fallback to using the latest cache if no exact match is found
+            # - v1-dependencies-
+            
       - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-
+         # key: v1-dependencies-{{ checksum "pom.xml" }}
+          key: circleci/openjdk:8-jdk-{{ checksum "pom.xml" }}
       # run tests!
       - run: mvn integration-test
