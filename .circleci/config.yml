@@ -5,10 +5,10 @@
 version: 2
 jobs:
   build:
-    docker:
-    working_directory: ~/maven
+    docker:    
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
+    working_directory: ~/repo
     branches:
       only:
         - demo6
