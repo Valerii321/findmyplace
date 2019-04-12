@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/maven:3.3-jdk-8
+      - image: circleci/openjdk:8-jdk
     branches:
       only:
         - demo6
