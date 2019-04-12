@@ -27,7 +27,7 @@ jobs:
 
       # Download and cache dependencies    
       - restore_cache:
-          key: maven-{{ checksum "pom.xml" }} 
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }} 
             # - v1-dependencies-{{ checksum "pom.xml" }}
             # # fallback to using the latest cache if no exact match is found
             # - v1-dependencies-
@@ -38,6 +38,6 @@ jobs:
           paths:
             - ~/.m2
          # key: v1-dependencies-{{ checksum "pom.xml" }}
-          key: maven-{{ checksum "pom.xml" }}
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       # run tests!
       - run: mvn integration-test
