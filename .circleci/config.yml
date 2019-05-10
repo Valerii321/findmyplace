@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:        
-    working_directory: ~/repo 
+    working_directory: ~/repo/api
     docker:    
       # The primary container is an instance of the first image listed. The job's commands run in this container.
       - image: circleci/openjdk:8-jdk
@@ -20,8 +20,8 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
       # run tests!
-      - run: cd api && mvn install -Dmaven.test.skip=true'
-      - run: cd api && mvn clean package -DskipTests=true'
+      - run: mvn install -Dmaven.test.skip=true'
+      - run: mvn clean package -DskipTests=true'
 workflows:
   version: 2
   build_and_test:
