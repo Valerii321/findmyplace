@@ -15,6 +15,7 @@ jobs:
 
     steps:
       - checkout
+      - run: ls
       - save_cache:
           paths:
             - ~/.m2
