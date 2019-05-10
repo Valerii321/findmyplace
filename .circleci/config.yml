@@ -15,14 +15,15 @@ jobs:
 
     steps:
       - checkout
+          path: ~/repo/api
       - run: cd api && ls
       - save_cache:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
       # run tests!
-      - run: cd api && mvn install -Dmaven.test.skip=true'
-      - run: cd api && mvn clean package -DskipTests=true'
+      - run: mvn install -Dmaven.test.skip=true'
+      - run: mvn clean package -DskipTests=true'
 workflows:
   version: 2
   build_and_test:
