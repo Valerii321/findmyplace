@@ -4,15 +4,11 @@
 #
 version: 2
 jobs:
-  build:
+  api:
     docker:    
       # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:8-jdk    
     working_directory: ~/repo 
-    branches:
-      only:
-        - demo6
-
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -22,24 +18,17 @@ jobs:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
 
+
+    # branches:
+    #   only:
+    #     - demo6
     steps:
       - checkout
-
-      # Download and cache dependencies    
-      
-      # - restore_cache:
-      #     key: circleci-demo-java-spring-{{ checksum "pom.xml" }} 
-            # - v1-dependencies-{{ checksum "pom.xml" }}
-            # # fallback to using the latest cache if no exact match is found
-            # - v1-dependencies-
-            
-      # - run: mvn dependency:go-offline
-
       - save_cache:
           paths:
             - ~/.m2
          # key: v1-dependencies-{{ checksum "pom.xml" }}
           key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
       # run tests!
-      - run: cd api && mvn test
-      - run: mvn integration-test
+      - run: cd api && mvn install -Dmaven.test.skip=true'
+      - run: cd api && mvn clean package -DskipTests=true'
