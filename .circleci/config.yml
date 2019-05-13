@@ -8,7 +8,7 @@ jobs:
     docker:    
       # The primary container is an instance of the first image listed. The job's commands run in this container.
       - image: circleci/openjdk:8-jdk
-    working_directory: ~/repo/api
+    working_directory: ~/repo/
     environment:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
