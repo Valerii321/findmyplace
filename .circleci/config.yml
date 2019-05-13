@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout:
           path: ~/repo
-      - run: ls
+      - run: ls && pwd
       # - save_cache:
       #     paths:
       #       - ~/.m2
